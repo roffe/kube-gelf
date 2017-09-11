@@ -25,4 +25,4 @@ COPY out_gelf.rb /fluentd/plugins/out_gelf.rb
 
 ENTRYPOINT ["gosu"]
 
-CMD ["root", "exec", "fluentd", "-c", "/fluentd/etc/fluent.conf", "-p", "/fluentd/plugins"]
+CMD ["root", "fluentd", "-c", "/fluentd/etc/fluent.conf", "-p", "/fluentd/plugins"]
