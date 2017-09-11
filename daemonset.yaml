@@ -21,9 +21,17 @@ spec:
         image: roffe/kube-gelf:latest
         env:
         - name: GELF_HOST
-          value: "192.168.20.98"
+          valueFrom:
+            configMapKeyRef:
+              name: kube-gelf
+              # Specify the key associated with the value
+              key: GELF_HOST
         - name: GELF_PORT
-          value: "12201"
+          valueFrom:
+            configMapKeyRef:
+              name: kube-gelf
+              # Specify the key associated with the value
+              key: GELF_PORT
         volumeMounts:
         - name: varlog
           mountPath: /var/log
@@ -54,6 +62,9 @@ spec:
       - name: kube-gelf-config
         configMap:
           name: kube-gelf
+          items:
+          - key: fluent.conf
+            path: fluent.conf
       - name: gelf-pos
         hostPath:
           path: /var/log/pos
