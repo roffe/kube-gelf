@@ -24,13 +24,11 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: kube-gelf
-              # Specify the key associated with the value
               key: GELF_HOST
         - name: GELF_PORT
           valueFrom:
             configMapKeyRef:
               name: kube-gelf
-              # Specify the key associated with the value
               key: GELF_PORT
         volumeMounts:
         - name: varlog

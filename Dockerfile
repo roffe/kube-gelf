@@ -23,6 +23,6 @@ RUN apt-get update \
 
 COPY out_gelf.rb /fluentd/plugins/out_gelf.rb
 
-ENTRYPOINT ["fluentd"]
+ENTRYPOINT ["exec"]
 
-CMD ["-c", "/fluentd/etc/fluent.conf", "-p", "/fluentd/plugins"]
+CMD ["fluentd", "-c", "/fluentd/etc/fluent.conf", "-p", "/fluentd/plugins"]
