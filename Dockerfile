@@ -1,4 +1,6 @@
 FROM fluent/fluentd:v0.14-debian
+MAINTAINER Joakim Karlsson <joakim@roffe.nu>
+
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends \
