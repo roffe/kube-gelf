@@ -15,8 +15,9 @@ rules:
   - ""
   resources:
   - pods
+  - pods/exec
   - namespaces
-  verbs: ["get", "list", "watch"]
+  verbs: ["get", "list", "watch", "create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
