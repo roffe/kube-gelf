@@ -12,6 +12,8 @@ kubectl create configmap \
     --from-literal GELF_PORT=12201
 
 kubectl create -f daemonset.yaml
+
+kubectl create -f cron.yaml
 ```
 
 After updating the configmap reloading fluentd config on all pods can be done with kubectl access.
