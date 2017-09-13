@@ -20,3 +20,11 @@ Please allow atleast a minute to pass before issuing the command due to Kubernet
 ```bash
 for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail +2 | awk '{print $1}'`; do echo SIGHUP ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; sleep 1; done
 ```
+
+Or if one enables batch/v2alpha1=true in the apiservers the cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also remedie:
+
+in_tail prevents docker from removing container
+https://github.com/fluent/fluentd/issues/1680
+
+in_tail removes untracked file position during startup phase. It means the content of pos_file is growing until restart when you tails lots of files with dynamic path setting. I will fix this problem in the future. Check this issue.
+https://github.com/fluent/fluentd/issues/1126
