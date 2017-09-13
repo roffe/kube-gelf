@@ -4,6 +4,8 @@ metadata:
   name: kube-gelf-reload-config
   namespace: kube-system
 spec:
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   schedule: "*/30 * * * *"
   jobTemplate:
     spec:
