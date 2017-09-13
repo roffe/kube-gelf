@@ -1,0 +1,20 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: kube-gelf-reload-config
+  namespace: kube-system
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: kube-gelf
+          containers:
+          - name: cron
+            image: gcr.io/google_containers/hyperkube-amd64:v1.7.5
+            args:
+            - /bin/sh
+            - -c
+            - for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; done
+          restartPolicy: OnFailure
