@@ -1,7 +1,5 @@
 # Kube-gelf
 
-## WIP
-
 ```bash
 kubectl create -f rbac.yaml
 
