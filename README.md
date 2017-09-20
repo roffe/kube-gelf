@@ -13,6 +13,7 @@ kubectl create configmap \
 
 kubectl create -f daemonset.yaml
 
+# optional, see notes below
 kubectl create -f cron.yaml
 ```
 
