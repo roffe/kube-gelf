@@ -14,7 +14,6 @@ spec:
           serviceAccountName: kube-gelf
           containers:
           - name: cron
-#            image: gcr.io/google_containers/hyperkube-amd64:v1.7.5
             image: roffe/kubectl:1.7.6
             args:
             - /bin/sh
