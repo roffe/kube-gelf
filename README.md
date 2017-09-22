@@ -24,8 +24,13 @@ Please allow atleast a minute to pass before issuing the command due to Kubernet
 for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; done
 ```
 
-Or if one enables batch/v2alpha1=true in the apiservers the cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also remedie:
+## Cron
+Enable `batch/v2alpha1=true` in the apiserver(s) --runtime-config=, restart them + controller-manager
 
+The cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also works around some fluend bugs.
+
+
+## Fluentd Bugs
 in_tail prevents docker from removing container
 https://github.com/fluent/fluentd/issues/1680
 
