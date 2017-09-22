@@ -1,6 +1,6 @@
-# Kube-gelf
-
-## WIP
+# kube-gelf
+CoreOS kubernetes container logs & journald log collector with graylog output.
+Configurable through configmap and with provided cron example to mitigate some fluentd bugs as well as providing option for config reloads
 
 ```bash
 kubectl create -f rbac.yaml
@@ -13,6 +13,7 @@ kubectl create configmap \
 
 kubectl create -f daemonset.yaml
 
+# optional, see notes below
 kubectl create -f cron.yaml
 ```
 
@@ -20,7 +21,7 @@ After updating the configmap reloading fluentd config on all pods can be done wi
 Please allow atleast a minute to pass before issuing the command due to Kubernetes not real-time syncing configmap updates to volumes.
 
 ```bash
-for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail +2 | awk '{print $1}'`; do echo SIGHUP ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; sleep 1; done
+for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; done
 ```
 
 If one enables `batch/v2alpha1=true` in the apiservers the cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration and also remedy the following issues:
