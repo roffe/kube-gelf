@@ -23,7 +23,7 @@ Please allow atleast a minute to pass before issuing the command due to Kubernet
 for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail +2 | awk '{print $1}'`; do echo SIGHUP ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; sleep 1; done
 ```
 
-Or if one enables batch/v2alpha1=true in the apiservers the cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also remedie:
+If one enables `batch/v2alpha1=true` in the apiservers the cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration and also remedy the following issues:
 
 in_tail prevents docker from removing container
 https://github.com/fluent/fluentd/issues/1680
