@@ -1,4 +1,5 @@
 # kube-gelf
+
 CoreOS kubernetes container logs & journald log collector with graylog output.
 Configurable through configmap and with provided cron example to mitigate some fluentd bugs as well as providing option for config reloads
 
@@ -25,7 +26,8 @@ for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +
 ```
 
 ## Cron
-Enable `batch/v2alpha1=true` in the apiserver(s) --runtime-config=, restart them + controller-manager
+
+Enable batch/v2alpha1=true in the apiserver(s) --runtime-config=, restart them + controller-manager
 =======
 
 The cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also works around some fluend bugs.
