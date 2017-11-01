@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: DaemonSet
 metadata:
   name: kube-gelf
@@ -8,6 +8,9 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: kube-gelf
   template:
     metadata:
       labels:
@@ -45,9 +48,6 @@ spec:
           subPath: fluent.conf
       tolerations:
       - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/etcd
         operator: Exists
         effect: NoSchedule
       volumes:

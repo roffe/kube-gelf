@@ -26,9 +26,12 @@ for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +
 ```
 
 ## Cron
+As of Kubernetes 1.8 batch/v1beta1 is enabled by default and no additional changes are needed.
 
-Enable batch/v2alpha1=true in the apiserver(s) --runtime-config=,
-restart them + controller-manager
+If you are on < 1.8:
+
+Enable batch/v2alpha1=true in the apiserver(s) --runtime-config= & restart apiservers + controller-manager.
+Also change the apiVersion from batch/v1beta1 to batch/v2alpha1
 
 The cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also works around some fluend bugs.
 
