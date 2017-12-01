@@ -42,3 +42,4 @@ https://github.com/fluent/fluentd/issues/1680
 in_tail removes untracked file position during startup phase. It means the content of pos_file is growing until restart when you tails lots of files with dynamic path setting. I will fix this problem in the future. Check this issue.
 https://github.com/fluent/fluentd/issues/1126
 
+
