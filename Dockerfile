@@ -17,7 +17,7 @@ RUN apt-get update \
  && gem install fluent-plugin-kubernetes_metadata_filter_v0.14 -v 0.24.1 \
  && gem install gelf -v 3.0.0 \
  && gem install fluent-plugin-systemd -v 0.3.0 \
- && wget https://raw.githubusercontent.com/emsearcy/fluent-plugin-gelf/master/lib/fluent/plugin/out_gelf.rb -O /fluentd/plugins/out_gelf.rb \
+ && wget https://raw.githubusercontent.com/bedag/fluent-plugin-gelf/master/lib/fluent/plugin/out_gelf.rb -O /fluentd/plugins/out_gelf.rb \
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
                   $buildDeps \
