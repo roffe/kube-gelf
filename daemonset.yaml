@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kube-gelf
@@ -17,11 +17,10 @@ spec:
         app: kube-gelf
     spec:
       serviceAccountName: kube-gelf
-      # To get host nodename, needs to be solved more elegant
-      hostNetwork: true
+      dnsPolicy: ClusterFirst
       containers:
       - name: agent
-        image: roffe/kube-gelf:latest
+        image: roffe/kube-gelf:v1.1
         env:
         - name: GELF_HOST
           valueFrom:
