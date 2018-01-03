@@ -41,3 +41,11 @@ https://github.com/fluent/fluentd/issues/1680
 
 in_tail removes untracked file position during startup phase. It means the content of pos_file is growing until restart when you tails lots of files with dynamic path setting. I will fix this problem in the future. Check this issue.
 https://github.com/fluent/fluentd/issues/1126
+
+
+## Changelog
+
+### 1.1
+Got rid of hostNetwork and added a NODENAME env variable utilizing the downward api.
+
+Changed output filter to the official graylog output. this required a change in the config file so please update your configmap.

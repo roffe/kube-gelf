@@ -32,6 +32,10 @@ spec:
             configMapKeyRef:
               name: kube-gelf
               key: GELF_PORT
+        - name: NODENAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         volumeMounts:
         - name: varlog
           mountPath: /var/log
