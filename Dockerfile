@@ -31,8 +31,10 @@ RUN apt-get update \
  && gem install fluent-plugin-kubernetes_metadata_filter -v 1.0.0 \
  && gem install fluent-plugin-systemd -v 0.3.1 \
  && gem install fluent-plugin-graylog -v 1.0.2 \
-  && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+ && gem install gelf -v 3.0.0 \
+ && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_$dpkgArch \
+ && wget https://raw.githubusercontent.com/bedag/fluent-plugin-gelf/master/lib/fluent/plugin/out_gelf.rb -O /fluentd/plugins/out_gelf.rb \
  && chmod +x /usr/bin/dumb-init \
  && wget -O /tmp/jemalloc-4.4.0.tar.bz2 https://github.com/jemalloc/jemalloc/releases/download/4.4.0/jemalloc-4.4.0.tar.bz2 \
  && cd /tmp && tar -xjf jemalloc-4.4.0.tar.bz2 && cd jemalloc-4.4.0/ \
