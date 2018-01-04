@@ -26,6 +26,7 @@ for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +
 ```
 
 ## Cron
+
 As of Kubernetes 1.8 batch/v1beta1 is enabled by default and no additional changes are needed.
 
 If you are on < 1.8:
@@ -36,8 +37,17 @@ Also change the apiVersion from batch/v1beta1 to batch/v2alpha1
 The cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also works around some fluend bugs.
 
 ## Fluentd Bugs
+
 in_tail prevents docker from removing container
-https://github.com/fluent/fluentd/issues/1680
+<https://github.com/fluent/fluentd/issues/1680>.
 
 in_tail removes untracked file position during startup phase. It means the content of pos_file is growing until restart when you tails lots of files with dynamic path setting. I will fix this problem in the future. Check this issue.
-https://github.com/fluent/fluentd/issues/1126
+<https://github.com/fluent/fluentd/issues/1126>.
+
+## Changelog
+
+### 1.1
+
+Got rid of hostNetwork and added a NODENAME env variable utilizing the downward api. All log entries will contain the field `hostname: <your nodename in kubernetes>`
+
+Changed output filter to the gem fluent-plugin-graylog 1.0.2, this required a change in the config file so please update your configmap.
