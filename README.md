@@ -49,5 +49,3 @@ in_tail removes untracked file position during startup phase. It means the conte
 ### 1.1
 
 Got rid of hostNetwork and added a NODENAME env variable utilizing the downward api. All log entries will contain the field `hostname: <your nodename in kubernetes>`
-
-Changed output filter to the gem fluent-plugin-graylog 1.0.2, this required a change in the config file so please update your configmap.
