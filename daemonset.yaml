@@ -32,6 +32,11 @@ spec:
             configMapKeyRef:
               name: kube-gelf
               key: GELF_PORT
+        - name: GELF_PROTOCOL
+          valueFrom:
+            configMapKeyRef:
+              name: kube-gelf
+              key: GELF_PROTOCOL
         - name: NODENAME
           valueFrom:
             fieldRef:
