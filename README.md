@@ -10,7 +10,8 @@ kubectl create configmap \
     --namespace kube-system kube-gelf \
     --from-file fluent.conf \
     --from-literal GELF_HOST=<server address> \
-    --from-literal GELF_PORT=12201
+    --from-literal GELF_PORT=12201 \
+    --from-literal GELF_PROTOCOL=<udp|tcp>
 
 kubectl create -f daemonset.yaml
 
@@ -31,10 +32,12 @@ As of Kubernetes 1.8 batch/v1beta1 is enabled by default and no additional chang
 
 If you are on < 1.8:
 
-Enable batch/v2alpha1=true in the apiserver(s) --runtime-config= & restart apiservers + controller-manager.
-Also change the apiVersion from batch/v1beta1 to batch/v2alpha1
+Enable `batch/v2alpha1=true` in the apiserver(s) `--runtime-config=` & restart apiservers + controller-manager.
+Also change the apiVersion from `batch/v1beta1` to `batch/v2alpha1`
 
 The cron.yaml can be used to deploy a cronJob that periodicly tells kube-gelf to reload it's configuration to also works around some fluend bugs.
+
+I have several images made for different Kubernetes versions and you could adapt your cron.yaml by using any of my avail image tags here: <https://hub.docker.com/r/roffe/kubectl/tags/>
 
 ## Fluentd Bugs
 
@@ -45,6 +48,11 @@ in_tail removes untracked file position during startup phase. It means the conte
 <https://github.com/fluent/fluentd/issues/1126>.
 
 ## Changelog
+
+### 1.2
+
+* Introduced new ENV variable GELF_PROTOCOL for protocol selection. Valid values are "udp" or "tcp". This requires a update of you configmap from earlier verisons
+* Changed output plugin to <https://github.com/bodhi-space/fluent-plugin-gelf-hs>
 
 ### 1.1
 
