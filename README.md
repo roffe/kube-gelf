@@ -5,6 +5,8 @@ Configurable through [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-
 
 ## Notes
 
+This project is automaticly built at [Docker Hub](https://hub.docker.com/r/roffe/kube-gelf/)
+
 This image has only been tested with CoreOS but should work with any other distribution as long as the paths in fluent.conf & the daemonset is adjusted accordingly.
 
 ## Installation
