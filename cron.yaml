@@ -14,7 +14,7 @@ spec:
           serviceAccountName: kube-gelf
           containers:
           - name: cron
-            image: roffe/kubectl:v1.9.0
+            image: roffe/kubectl:v1.9.1
             args:
             - /bin/sh
             - -c

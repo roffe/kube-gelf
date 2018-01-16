@@ -1,9 +1,15 @@
 # kube-gelf
 
-CoreOS kubernetes container logs & journald log collector with graylog output.
-Configurable through configmap and with provided cron example to mitigate some fluentd bugs as well as providing option for config reloads
+[Fluentd](https://www.fluentd.org/) [CoreOS](https://coreos.com/) Kubernetes container logs & [journald](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html) log collector with [Graylog](https://www.graylog.org/) output.
+Configurable through [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) and with provided cron example to mitigate some fluentd bugs as well as providing option for config reloads
 
-```bash
+## Notes
+
+This image has only been tested with CoreOS but should work with any other distribution as long as the paths in fluent.conf & the daemonset is adjusted accordingly.
+
+## Installation
+
+```sh
 kubectl create -f rbac.yaml
 
 kubectl create configmap \
@@ -22,7 +28,7 @@ kubectl create -f cron.yaml
 After updating the configmap reloading fluentd config on all pods can be done with kubectl access.
 Please allow atleast a minute to pass before issuing the command due to Kubernetes not real-time syncing configmap updates to volumes.
 
-```bash
+```sh
 for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; done
 ```
 
