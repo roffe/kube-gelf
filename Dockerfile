@@ -53,3 +53,4 @@ ENV LD_PRELOAD="/usr/lib/libjemalloc.so.2"
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 CMD fluentd -c /fluentd/etc/${FLUENTD_CONF} -p /fluentd/plugins $FLUENTD_OPT
+
