@@ -18,5 +18,5 @@ spec:
             args:
             - /bin/sh
             - -c
-            - for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c 'kill -1 1'; done
+            - for POD in `kubectl get pod --namespace kube-system -l app=kube-gelf | tail -n +2 | awk '{print $1}'`; do echo RELOAD ${POD}; kubectl exec --namespace kube-system ${POD} -- /bin/sh -c "ps aux|grep '/usr/bin/ruby2.3 /usr/local/bin/fluentd' | grep -v grep | awk {'print \$2'} | xargs kill -1"; done
           restartPolicy: Never

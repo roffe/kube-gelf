@@ -17,6 +17,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
             ca-certificates \
             ruby \
+            procps \
  && buildDeps=" \
       make gcc g++ libc-dev \
       ruby-dev \
