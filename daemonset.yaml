@@ -20,7 +20,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: agent
-        image: roffe/kube-gelf:v1.1
+        image: roffe/kube-gelf:v1.2.1
         env:
         - name: GELF_HOST
           valueFrom:
