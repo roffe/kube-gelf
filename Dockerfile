@@ -34,6 +34,7 @@ RUN apt-get update \
     gelf:3.0.0 \
     json:2.1.0 \
     oj:2.18.3 \
+    fluent-plugin-record-modifier \
  && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_$dpkgArch \
  && chmod +x /usr/bin/dumb-init \
